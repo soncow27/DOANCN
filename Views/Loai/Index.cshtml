@@ -1,0 +1,140 @@
+﻿@*@model IEnumerable<DoAnCN.Models.Loai>
+
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.maloai)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tenloai)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.maloai)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tenloai)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+
+    </table>*@
+
+
+
+@using PagedList.Mvc;
+@using DoAnCN.Models;
+
+@model  PagedList.PagedList<Loai>
+
+<link href=”~/Content/PagedList.css” rel=”stylesheet” type=”text/css” />
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .paginate_button > a {
+        z-index: 3;
+        color: #fff;
+        background-color: #4e73df;
+        border-color: #4e73df;
+    }
+</style>
+<p>
+    @Html.ActionLink("Tạo mới loại đồ ăn", "Create")
+</p>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">LOẠI ĐỒ ĂN</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Mã Loại</th>
+                        <th>Tên Loại</th>
+                        <th>...</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Mã Loại</th>
+                        <th>Tên Loại</th>
+                        <th>...</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.maloai)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tenloai)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.maloai }) |
+                                @Html.ActionLink("Details", "Detail", new { id = item.maloai }) |
+                                @Ajax.ActionLink("Delete",
+                                               "Delete",
+                                               "Loai",
+                                               new { id = item.maloai },
+                                               new AjaxOptions {
+                                                   HttpMethod = "POST",
+                                                   Confirm = "Bạn có muốn xóa " + item.tenloai,
+                                                   OnSuccess = "RemoveRow"
+                                               },
+                                               new { @class = "pest_btn" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }),
+            new PagedListRenderOptions
+            {
+                LiElementClasses = new string[] { "page-item paginate_button" },
+                LinkToNextPageFormat = "<i class='fas fa-angle-right'></i>",
+                LinkToLastPageFormat = "<i class='fad fa-angle-double-right'></i>",
+                LinkToPreviousPageFormat = "<i class='fas fa-angle-left'></i>",
+                LinkToFirstPageFormat = "<i class='fad fa-angle-double-left'></i>"
+                //PageClasses = new string[] { "page-link" }
+            }
+
+   )
+
+
+<script type="text/javascript">
+    function RemoveRow() {
+        var $tr = $(this).closest('tr');
+        $tr.remove();
+    }
+</script>

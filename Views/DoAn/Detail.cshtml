@@ -1,0 +1,122 @@
+﻿@model DoAnCN.Models.Doan
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section script{
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyDA6iWd1pYuY2pEMVBU-r5Xaq1Pby3M0uU",
+            authDomain: "doancn-fb163.firebaseapp.com",
+            databaseURL: "https://doancn-fb163-default-rtdb.firebaseio.com",
+            projectId: "doancn-fb163",
+            storageBucket: "doancn-fb163.appspot.com",
+            messagingSenderId: "980444095904",
+            appId: "1:980444095904:web:71d35b4555b72ba0c730c5",
+            measurementId: "G-08F5ZH28BY"
+        };
+        try {
+            firebase.initializeApp(firebaseConfig);
+            var storage = firebase.storage();
+        } catch (e) {
+            alert(e.toString());
+        }
+
+
+    </script>
+
+
+
+}
+<h2>Detail</h2>
+
+<div>
+    <h4>Doan</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.madoan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.madoan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tendoan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tendoan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.giaban)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.giaban)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.motadoan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.motadoan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.anhdoanurl)
+        </dt>
+
+        <dd>
+            <div>
+                <p hidden class="hiddenid">@Model.anhdoanurl</p>
+                <img id="hinhdoan" src="" style="width: 200px; height : 200px;" />
+            </div>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.soluong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.soluong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.maloai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.maloai)
+        </dd>
+
+    </dl>
+</div>
+@section scripthinh {
+    <script>
+        $(document).ready(function () {
+            $.each($('p[class*=hiddenid]'), function (index, item) {
+                var a = item.innerHTML;
+                //imageLink = "gs://doancn-fb163.appspot.com/Images/city5.jpg";
+                try {
+                    storage.refFromURL(a).getDownloadURL().then(function (url) {
+                        $(item).next("img").attr("src", url.toString());
+                        //$(this).closest("#hinhdoan").attr("src", url.toString());
+                        //$("#hinhdoan").attr("src", url.toString());
+                    }).catch(function (error) {
+
+                    });
+                } catch (e) {
+                }
+            });
+        });
+    </script>
+}
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

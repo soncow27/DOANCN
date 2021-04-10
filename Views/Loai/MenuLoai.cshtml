@@ -1,0 +1,5 @@
+﻿@model IEnumerable<DoAnCN.Models.Loai>
+@foreach (var loai in Model)
+{
+    <li><a href="@Url.Action("Index", "NguoiDung", new { id = loai.maloai })">@loai.tenloai</a></li>
+}

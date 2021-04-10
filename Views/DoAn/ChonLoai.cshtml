@@ -1,0 +1,29 @@
+﻿@model IEnumerable<DoAnCN.Models.Loai>
+
+<link href="~/Assets/Login/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+<link href="~/Assets/Login/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+<link href="~/Assets/Login/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+<link href="~/Assets/Login/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+<link href="~/Assets/Login/css/main.css" rel="stylesheet" media="all">
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<div class="col-2">
+    <div class="input-group">
+        <div class="rs-select2 js-select-simple select--no-search">
+            <select name="loai" id="loai" style="padding-right: 10px">
+                @foreach (var loai in Model)
+                {
+                    <option value="@loai.maloai">@loai.tenloai</option>
+                }
+
+
+            </select>
+            <div class="select-dropdown"></div>
+        </div>
+    </div>
+</div>
+<script src="~/Assets/Login/vendor/jquery/jquery.min.js"></script>
+<script src="~/Assets/Login/vendor/select2/select2.min.js"></script>
+<script src="~/Assets/Login/vendor/datepicker/moment.min.js"></script>
+<script src="~/Assets/Login/vendor/datepicker/daterangepicker.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Assets/Login/js/global.js"></script>

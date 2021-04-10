@@ -1,0 +1,6 @@
+﻿@model IEnumerable<DoAnCN.Models.Loai>
+
+@foreach (var loai in Model)
+{
+    <li data-filter=".@loai.maloai"><p>@loai.tenloai</p></li>
+}

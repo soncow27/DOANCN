@@ -1,0 +1,12 @@
+﻿@{ if (ViewBag.Status == 0)
+    {
+            @Html.ActionLink("Đăng nhập", "DangNhap", new { controller = "NguoiDung" }, new { style = "display: inline-block" })
+    }
+    else
+    {
+        <p  style = "display: contents">Name: @ViewBag.Ten</p>
+        @Html.ActionLink("Chỉnh sửa thông tin cá nhân", "ViewInfo", new { controller = "NguoiDung", username = ViewBag.Ten }, new { style = "display: contents" })
+        @Html.ActionLink("Đăng xuất", "DangXuat", new { controller = "NguoiDung"})
+       
+    }
+}

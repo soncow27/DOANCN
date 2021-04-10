@@ -1,0 +1,53 @@
+﻿@model DoAnCN.Models.LoginModel
+
+@{
+    Layout = null;
+}
+
+<link href="~/Assets/Login/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+<link href="~/Assets/Login/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+<link href="~/Assets/Login/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+<link href="~/Assets/Login/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+<link href="~/Assets/Login/css/main.css" rel="stylesheet" media="all">
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="page-wrapper bg-red p-t-180 p-b-100 font-robo">
+        <div class="login wrapper wrapper--w960">
+            <div class="card card-2">
+                <div class="card-heading"></div>
+                <div class="card-body">
+
+                    <h2 class="title">Đăng nhập tài khoản</h2>
+                    <form method="POST">
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "input--style-2", required = "true", placeholder = "Username" } })
+                        </div>
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "input--style-2", required = "true", placeholder = "Password", id = "pass", type = "password" } })
+                        </div>
+                        <div>
+                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                        </div>
+                        @ViewBag.ThongBao
+                        <div class="p-t-30">
+                            <button class="btn btn--radius btn--green" type="submit">Đăng nhập</button>
+                        </div>
+                    </form>
+                    <a style="transform: translate(0, 50px);
+                            display: inline-block;" href="/Nguoidung/DangKy">Chưa có tài khoản ?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Assets/Login/vendor/jquery/jquery.min.js"></script>
+<script src="~/Assets/Login/vendor/select2/select2.min.js"></script>
+<script src="~/Assets/Login/vendor/datepicker/moment.min.js"></script>
+<script src="~/Assets/Login/vendor/datepicker/daterangepicker.js"></script>
+<script src="~/Assets/Login/js/global.js"></script>
+

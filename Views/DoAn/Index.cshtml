@@ -1,0 +1,160 @@
+﻿
+@using PagedList.Mvc;
+@using DoAnCN.Models;
+@model  PagedList.PagedList<Doan>
+
+<link href=”~/Content/PagedList.css” rel=”stylesheet” type=”text/css” />
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section script{
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyDA6iWd1pYuY2pEMVBU-r5Xaq1Pby3M0uU",
+            authDomain: "doancn-fb163.firebaseapp.com",
+            databaseURL: "https://doancn-fb163-default-rtdb.firebaseio.com",
+            projectId: "doancn-fb163",
+            storageBucket: "doancn-fb163.appspot.com",
+            messagingSenderId: "980444095904",
+            appId: "1:980444095904:web:71d35b4555b72ba0c730c5",
+            measurementId: "G-08F5ZH28BY"
+        };
+        try {
+            firebase.initializeApp(firebaseConfig);
+            var storage = firebase.storage();
+        } catch (e) {
+            alert(e.toString());
+        }
+
+
+    </script>
+
+
+
+}
+
+<p>
+    @Html.ActionLink("Tạo mới đồ ăn", "Create")
+</p>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">ĐỒ ĂN</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Mã Đồ Ăn</th>
+                        <th>Mã Loại</th>
+                        <th>Tên Đồ Ăn</th>
+                        <th>Giá Bán</th>
+                        <th>Mô Tả Đồ Ăn</th>
+                        <th>Hình Minh Họa</th>
+                        <th>Số Lượng</th>
+                        <th>...</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Mã Đồ Ăn</th>
+                        <th>Mã Loại</th>
+                        <th>Tên Đồ Ăn</th>
+                        <th>Giá Bán</th>
+                        <th>Mô Tả Đồ Ăn</th>
+                        <th>Hình Minh Họa</th>
+                        <th>Số Lượng</th>
+                        <th>...</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.madoan)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.maloai)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tendoan)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.giaban)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.motadoan)
+                            </td>
+                            <td>
+                                <div>
+                                    <p hidden class="hiddenid">@item.anhdoanurl</p>
+                                    <img id="hinhdoan" src="" style="width: 200px; height : 200px;" />
+                                </div>
+
+
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.soluong)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.madoan }) |
+                                @Html.ActionLink("Details", "Detail", new { id = item.madoan }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.madoan })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<h2>Index</h2>
+
+
+
+
+
+@section scripthinh {
+
+    <script>
+        $(document).ready(function () {
+            $.each($('p[class*=hiddenid]'), function (index, item) {
+                var a = item.innerHTML;
+                //imageLink = "gs://doancn-fb163.appspot.com/Images/city5.jpg";
+                try {
+                    storage.refFromURL(a).getDownloadURL().then(function (url) {
+                        $(item).next("img").attr("src", url.toString());
+                        //$(this).closest("#hinhdoan").attr("src", url.toString());
+                        //$("#hinhdoan").attr("src", url.toString());
+                    }).catch(function (error) {
+
+                    });
+                } catch (e) {
+
+                }
+            });
+        });
+
+
+
+    </script>
+
+
+
+}
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }),
+            new PagedListRenderOptions
+            {
+                LiElementClasses = new string[] { "page-item paginate_button" },
+                LinkToNextPageFormat = "<i class='fas fa-angle-right'></i>",
+                LinkToLastPageFormat = "<i class='fad fa-angle-double-right'></i>",
+                LinkToPreviousPageFormat = "<i class='fas fa-angle-left'></i>",
+                LinkToFirstPageFormat = "<i class='fad fa-angle-double-left'></i>"
+                //PageClasses = new string[] { "page-link" }
+            }
+
+   )

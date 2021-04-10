@@ -1,0 +1,206 @@
+﻿@*@model DoAnCN.Models.Nguoidung
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DangKy</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Nguoidung</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.makh, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.makh, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.makh, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.hoten, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.hoten, new { htmlAttributes = new { @class = "input--style-2", placeholder = "Họ tên" } })
+                    @Html.ValidationMessageFor(model => model.hoten, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.taikhoan, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.taikhoan, new { htmlAttributes = new { @class = "input--style-2", required = "true", placeholder = "Username" } })
+                    @Html.ValidationMessageFor(model => model.taikhoan, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.matkhau, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.matkhau, new { htmlAttributes = new { @class = "input--style-2", required = "true", placeholder = "Password", id = "pass", type = "password" } })
+                    @Html.ValidationMessageFor(model => model.matkhau, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "input--style-2", required = "true", placeholder = "Email" } })
+                    @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.diachi, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.diachi, new { htmlAttributes = new { @class = "input--style-2 ", required = "true", placeholder = "Địa chỉ của bạn" } })
+                    @Html.ValidationMessageFor(model => model.diachi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.sdt, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.sdt, new { htmlAttributes = new { @class = "input--style-2 ", required = "true", placeholder = "Số điện thoại" } })
+                    @Html.ValidationMessageFor(model => model.sdt, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</body>
+</html>*@
+
+@model DoAnCN.Models.Nguoidung
+
+@{
+    Layout = null;
+}
+
+<link href="~/Assets/Login/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+<link href="~/Assets/Login/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+<link href="~/Assets/Login/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+<link href="~/Assets/Login/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+<link href="~/Assets/Login/css/main.css" rel="stylesheet" media="all">
+
+
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="page-wrapper bg-red p-t-180 p-b-100 font-robo" id="loginForm">
+        <div class="login wrapper wrapper--w960">
+            <div class="card card-2">
+                <div class="card-heading"></div>
+                <div class="card-body">
+
+                    <h2 class="title">Đăng ký tài khoản</h2>
+                    <form method="POST">
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.taikhoan, new { htmlAttributes = new { @class = "input--style-2", required = "true", placeholder = "Username" } })
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    @Html.EditorFor(model => model.matkhau, new { htmlAttributes = new { @class = "input--style-2", required = "true", placeholder = "Password", id = "pass", type = "password" } }) 
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    @Html.Password("XacNhanMatKhau", null, new { @class = "input--style-2", required = "true", placeholder = "Nhập lại password", id = "cfmpass" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.hoten, new { htmlAttributes = new { @class = "input--style-2", placeholder = "Họ tên" } })
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+
+                                    @Html.TextBox("NgaySinh", null, new { @class = "input--style-2 js-datepicker", required = "true", placeholder = "Birthdate" })
+
+                                    <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                        @Html.DropDownList("GioiTinh", new SelectList(
+                                     new[]
+                                     {
+                                              new { Value = "true", Text = "Nam" },
+                                              new { Value = "false", Text = "Nữ" },
+                                     },
+                                     "Value",
+                                     "Text"
+                                 ))
+                                        <div class="select-dropdown"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.diachi, new { htmlAttributes = new { @class = "input--style-2 ", required = "true", placeholder = "Địa chỉ của bạn" } })
+                        </div>
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "input--style-2", required = "true", placeholder = "Email" } })
+
+                        </div>
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.sdt, new { htmlAttributes = new { @class = "input--style-2 ", required = "true", placeholder = "Số điện thoại" } })
+                        </div>
+
+                        <div>
+                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="p-t-30">
+                            <button class="btn btn--radius btn--green" type="submit">Đăng ký</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Assets/Login/vendor/jquery/jquery.min.js"></script>
+<script src="~/Assets/Login/vendor/select2/select2.min.js"></script>
+<script src="~/Assets/Login/vendor/datepicker/moment.min.js"></script>
+<script src="~/Assets/Login/vendor/datepicker/daterangepicker.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Assets/Login/js/global.js"></script>
+<script>
+    function checkPasswordMatch() {
+        var password = $("#pass").val();
+        var confirmPassword = $("#cfmpass").val();
+        if (password != confirmPassword)
+            alert("Xác nhận password không trùng khớp!");
+    }
+    $(document).ready(function () {
+        $("#cfmpass").focusout(checkPasswordMatch);
+    });
+</script>
