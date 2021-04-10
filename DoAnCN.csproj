@@ -2462,7 +2462,6 @@
     <Content Include="Views\NguoiDung\Create.cshtml" />
     <Content Include="Views\NguoiDung\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Loai\MenuLoai.cshtml" />
     <Content Include="Views\Loai\Detail.cshtml" />
     <Content Include="Views\Loai\Edit.cshtml" />
     <Content Include="Views\DoAn\Detail.cshtml" />
@@ -2474,6 +2473,7 @@
     <Content Include="Views\Home\Featured.cshtml" />
     <Content Include="Views\Home\FeaturedMenu.cshtml" />
     <Content Include="Views\NguoiDung\LoginStatus.cshtml" />
+    <Content Include="Views\Loai\MenuLoai.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

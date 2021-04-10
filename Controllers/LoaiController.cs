@@ -59,6 +59,20 @@ namespace LoaiCN.Controllers
             
         }
 
+        public ActionResult MenuLoai()
+        {
+            client = new FireSharp.FirebaseClient(config);
+            FirebaseResponse response = client.Get("Loais");
+
+            dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
+            var list = new List<Loai>();
+            foreach (var item in data)
+            {
+                list.Add(JsonConvert.DeserializeObject<Loai>(((JProperty)item).Value.ToString()));
+            }
+            return PartialView(list);
+        }
+
         [HttpGet]
         public ActionResult Create()
         {
@@ -90,19 +104,7 @@ namespace LoaiCN.Controllers
             SetResponse setResponse = client.Set("Loais/" + data.maloai, data);
         }
 
-        public ActionResult MenuLoai()
-        {
-            client = new FireSharp.FirebaseClient(config);
-            FirebaseResponse response = client.Get("Loais");
-
-            dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
-            var list = new List<Loai>();
-            foreach (var item in data)
-            {
-                list.Add(JsonConvert.DeserializeObject<Loai>(((JProperty)item).Value.ToString()));
-            }
-            return PartialView(list);
-        }
+      
 
         [HttpGet]
         public ActionResult Detail(string id)
